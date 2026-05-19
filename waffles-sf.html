@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waffles SF — Mission Bay Cutest Cat Competition</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B1A;
+    --orange-dark: #E05500;
+    --black: #1A1714;
+    --card-bg: #2A2420;
+    --card-bg2: #252018;
+    --text: #F0EAE0;
+    --text-muted: #A89880;
+    --cream: #F5E6C8;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--black);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--black);
+    border-bottom: 1px solid rgba(255,107,26,0.15);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.6rem;
+    color: var(--orange);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    min-height: 520px;
+    padding: 3rem 2.5rem 2rem;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    line-height: 1.15;
+    font-style: italic;
+    color: var(--cream);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 span { color: var(--orange); }
+
+  .hero-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border: 1.5px solid var(--text);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .btn-primary:hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+  }
+
+  .hero-img {
+    position: relative;
+    height: 440px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border: 2px dashed rgba(255,107,26,0.3);
+    border-radius: 4px;
+  }
+
+  .hero-img-placeholder .cat-emoji {
+    font-size: 5rem;
+  }
+
+  /* SECTIONS */
+  .sections {
+    background: var(--orange);
+    padding: 2rem 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .section-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 1.75rem;
+  }
+
+  .section-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--orange);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* BIO */
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+  }
+
+  /* TOYS */
+  .toys-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .toy-item {
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    padding: 0.75rem;
+    text-align: center;
+    border: 1px dashed rgba(255,107,26,0.25);
+  }
+
+  .toy-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    background: rgba(0,0,0,0.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+  }
+
+  .toy-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .toy-name {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  /* EVENTS */
+  .event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .event-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .event-date {
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .event-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    padding-top: 0.1rem;
+  }
+
+  /* FAVORITES */
+  .favorites-section {
+    background: var(--card-bg2);
+    padding: 3rem 2.5rem;
+  }
+
+  .favorites-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--orange);
+    margin-bottom: 1.5rem;
+  }
+
+  .foods-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .food-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    border: 1px solid rgba(255,107,26,0.15);
+    transition: border-color 0.2s;
+  }
+
+  .food-card:hover { border-color: var(--orange); }
+
+  .food-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+
+  .food-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .food-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* PLAYDATE FORM */
+  .playdate-section {
+    padding: 3rem 2.5rem;
+    background: var(--black);
+  }
+
+  .playdate-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+  }
+
+  .playdate-section p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+  }
+
+  .playdate-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 700px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,107,26,0.2);
+    border-radius: 6px;
+    color: var(--text);
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--orange);
+  }
+
+  .form-group select option { background: var(--card-bg); }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .btn-submit {
+    grid-column: 1 / -1;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.85rem;
+    font-size: 1rem;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-submit:hover { background: var(--orange-dark); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,107,26,0.15);
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .vote-btn {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .vote-btn:hover { background: var(--orange-dark); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--orange);
+    color: #fff;
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    z-index: 999;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-img { height: 300px; }
+    .sections { grid-template-columns: 1fr; }
+    .playdate-form { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+    .btn-submit { grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">Waffles SF</a>
+  <ul class="nav-links">
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#favorites">Favorites</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#playdate">Playdate</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Mission Bay Cutest Cat Competition 2025</div>
+    <h1>Meet <span>Waffles</span>,<br>SF's Finest Feline</h1>
+    <p class="hero-sub">Owned by Luffy of the Straw Hat crew.<br>Always dressed in black and white. Never not iconic.</p>
+    <a href="#playdate" class="btn-primary">Schedule a Playdate</a>
+  </div>
+  <div class="hero-img">
+    <div class="hero-img-placeholder" id="hero-placeholder">
+      <div class="cat-emoji">🐱</div>
+      <p>Drop Waffles' photo here</p>
+      <label style="cursor:pointer; color: var(--orange); font-size:0.85rem; font-weight:600;">
+        or click to upload
+        <input type="file" accept="image/*" style="display:none" onchange="loadHeroImage(event)">
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- THREE CARDS: Bio, Toys, Events -->
+<section class="sections" id="bio">
+  <!-- BIO -->
+  <div class="section-card">
+    <h2>⏱ Bio</h2>
+    <p class="bio-text">Waffles is a 3-year-old tuxedo cat with a big personality and even bigger dreams. Adopted by Luffy after a fateful encounter at the Mission Bay waterfront, Waffles spends her days plotting world domination, knocking things off counters, and demanding ear scratches at 3am. Always dressed for the occasion in her signature black and white, she's the classiest cat in all of SF — and she knows it.</p>
+  </div>
+
+  <!-- FAVORITE TOYS -->
+  <div class="section-card">
+    <h2>🐾 Favorite Toys</h2>
+    <div class="toys-grid">
+      <div class="toy-item">
+        <div class="toy-photo" id="toy1-photo">
+          <span style="font-size:0.7rem">photo here</span>
+          <input type="file" accept="image/*" style="display:none" id="toy1-input" onchange="loadToyImage(event,'toy1-photo')">
+        </div>
+        <div class="toy-name">Giant feather wand</div>
+      </div>
+      <div class="toy-item">
+        <div class="toy-photo" id="toy2-photo">
+          <span style="font-size:0.7rem">photo here</span>
+          <input type="file" accept="image/*" style="display:none" id="toy2-input" onchange="loadToyImage(event,'toy2-photo')">
+        </div>
+        <div class="toy-name">Crinkle fish</div>
+      </div>
+      <div class="toy-item">
+        <div class="toy-photo" id="toy3-photo">
+          <span style="font-size:0.7rem">photo here</span>
+          <input type="file" accept="image/*" style="display:none" id="toy3-input" onchange="loadToyImage(event,'toy3-photo')">
+        </div>
+        <div class="toy-name">Laser dot</div>
+      </div>
+      <div class="toy-item">
+        <div class="toy-photo" id="toy4-photo">
+          <span style="font-size:0.7rem">photo here</span>
+          <input type="file" accept="image/*" style="display:none" id="toy4-input" onchange="loadToyImage(event,'toy4-photo')">
+        </div>
+        <div class="toy-name">Cardboard box</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENTS -->
+  <div class="section-card" id="events">
+    <h2>📅 Event Calendar</h2>
+    <div class="event-list">
+      <div class="event-item">
+        <span class="event-date">May 10</span>
+        <p class="event-desc">Mission Bay Cat Competition — judging begins at noon</p>
+      </div>
+      <div class="event-item">
+        <span class="event-date">May 17</span>
+        <p class="event-desc">Playdate open house — Mission Bay Dog Park lawn</p>
+      </div>
+      <div class="event-item">
+        <span class="event-date">May 24</span>
+        <p class="event-desc">Victory parade (manifesting it)</p>
+      </div>
+      <div class="event-item">
+        <span class="event-date">Jun 7</span>
+        <p class="event-desc">Giants game viewing party — Waffles watches from the couch</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAVORITE FOODS -->
+<section class="favorites-section" id="favorites">
+  <h2>🍽 Favorite Foods</h2>
+  <div class="foods-grid">
+    <div class="food-card">
+      <div class="food-emoji">🐟</div>
+      <div class="food-name">Tuna Pâté</div>
+      <div class="food-desc">Premium, never from a can. She can tell.</div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🍗</div>
+      <div class="food-name">Shredded Chicken</div>
+      <div class="food-desc">Plain, no seasoning, served at room temp.</div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🦐</div>
+      <div class="food-name">Baby Shrimp</div>
+      <div class="food-desc">Her special occasion treat. Very dramatic about it.</div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🥩</div>
+      <div class="food-name">Beef Broth</div>
+      <div class="food-desc">The good stuff. Slurped with authority.</div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🐾</div>
+      <div class="food-name">Fancy Feast Feast</div>
+      <div class="food-desc">The classic. She won't admit she loves it.</div>
+    </div>
+    <div class="food-card">
+      <div class="food-emoji">🌿</div>
+      <div class="food-name">Fresh Catnip</div>
+      <div class="food-desc">Technically food. Legally a lifestyle.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYDATE FORM -->
+<section class="playdate-section" id="playdate">
+  <h2>Schedule a Playdate</h2>
+  <p>Waffles is accepting applications for new friends. Fill out the form and she'll have her human get back to you.</p>
+  <form class="playdate-form" onsubmit="submitForm(event)">
+    <div class="form-group">
+      <label>Your Name</label>
+      <input type="text" placeholder="Human's name" required>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="your@email.com" required>
+    </div>
+    <div class="form-group">
+      <label>Pet's Name</label>
+      <input type="text" placeholder="Your cat's name" required>
+    </div>
+    <div class="form-group">
+      <label>Pet Type</label>
+      <select>
+        <option>Cat</option>
+        <option>Dog (brave choice)</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Preferred Date</label>
+      <input type="date" required>
+    </div>
+    <div class="form-group">
+      <label>Preferred Time</label>
+      <select>
+        <option>Morning (9am–12pm)</option>
+        <option>Afternoon (12pm–4pm)</option>
+        <option>Evening (4pm–7pm)</option>
+      </select>
+    </div>
+    <div class="form-group full">
+      <label>Anything Waffles should know?</label>
+      <textarea placeholder="Allergies, personality notes, snack preferences..."></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Request a Playdate with Waffles ✨</button>
+  </form>
+</section>
+
+<footer>
+  <p>wafflessf.com — rooting for Waffles since 2025</p>
+  <button class="vote-btn" onclick="showToast('Vote submitted! 🐾 Go Waffles!')">Vote Waffles #1</button>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  function loadHeroImage(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const ph = document.getElementById('hero-placeholder');
+      ph.innerHTML = '<img src="' + ev.target.result + '" alt="Waffles" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function loadToyImage(e, targetId) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const el = document.getElementById(targetId);
+      el.innerHTML = '<img src="' + ev.target.result + '" alt="toy" style="width:100%;height:100%;object-fit:cover;border-radius:4px;">';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  document.querySelectorAll('.toy-photo').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => {
+      const input = el.querySelector('input[type=file]');
+      if (input) input.click();
+    });
+  });
+
+  document.getElementById('hero-placeholder').style.cursor = 'pointer';
+
+  function submitForm(e) {
+    e.preventDefault();
+    showToast("Playdate request sent! Waffles will consider it. 🐾");
+    e.target.reset();
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>
